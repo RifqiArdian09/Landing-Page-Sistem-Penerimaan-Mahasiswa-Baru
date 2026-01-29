@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="id" class="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="meta.title">SIMARU - Sistem Penerimaan Siswa Baru</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="overflow-x-hidden bg-background-light dark:bg-background-dark text-[#0d1b14] dark:text-white antialiased">
+    <div class="relative flex min-h-screen w-full flex-col">
+
+        <!-- Announcement Bar -->
+        <div id="announcementBar" class="w-full bg-accent-gold py-2 px-4 text-center">
+            <p class="flex items-center justify-center gap-2 text-xs md:text-sm font-semibold text-[#0d1b14]">
+                <span class="material-symbols-outlined text-sm">campaign</span>
+                <span data-i18n="announcement.text">Pendaftaran Gelombang I Tahun Akademik 2026/2027 telah dibuka!</span>
+            </p>
+        </div>
+
+        <div class="relative flex min-h-screen w-full flex-col">
+
+            <!-- Header -->
+            <header id="mainNav" class="sticky top-0 z-50 relative
+                    flex flex-wrap items-center justify-between gap-4
+                    border-b border-[#e7f3ed] dark:border-[#1a3b2a]
+                    bg-white/80 dark:bg-background-dark/80
+                    backdrop-blur-md
+                    px-4 md:px-6 lg:px-20 py-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <img src="images/logo.png" alt="Logo" class="h-10 md:h-12 w-auto" />
+                    <div class="flex flex-col">
+                        <h2 class="text-base md:text-lg font-extrabold tracking-tight">SIMARU</h2>
+                        <span class="text-[8px] md:text-[10px] uppercase tracking-widest font-bold text-black" data-i18n="brand.tagline">
+                            Sistem Penerimaan Mahasiswa Baru
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex flex-1 justify-center items-center gap-8">
+                    <a href="#main" class="nav-link">
+                        <span class="material-symbols-outlined">home</span>
+                        <span data-i18n="nav.home">Beranda</span>
+                    </a>
+                    <a href="#flowregist" class="nav-link">
+                        <span class="material-symbols-outlined">route</span>
+                        <span data-i18n="nav.flow">Alur Pendaftaran</span>
+                    </a>
+                    <a href="#faq" class="nav-link">
+                        <span class="material-symbols-outlined">help_center</span>
+                        <span data-i18n="nav.faq">FAQ</span>
+                    </a>
+                    <a href="#contact" class="nav-link">
+                        <span class="material-symbols-outlined">mail</span>
+                        <span data-i18n="nav.contact">Kontak</span>
+                    </a>
+                    <a href="https://umb.ac.id/" class="nav-link flex items-center gap-2">
+                        <span class="material-symbols-outlined">globe</span>
+                        <span data-i18n="nav.site">Situs UM Bengkulu</span>
+                    </a>
+                </nav>
+
+                <div class="flex items-center gap-2">
+                    <button id="navbarLangToggle" data-lang-toggle-btn
+                        class="hidden lg:inline-flex items-center justify-center w-11 h-11 rounded-full border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+                        aria-label="Switch language" title="Switch language">
+                        <span class="material-symbols-outlined text-xl">translate</span>
+                        <span class="sr-only">Switch language</span>
+                    </button>
+
+                    <a href="https://simaru.umb.ac.id/login"
+                        class="hidden lg:flex items-center gap-2 px-6 py-2 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-colors">
+                        <span class="material-symbols-outlined text-base">login</span>
+                        <span data-i18n="nav.login">Masuk</span>
+                    </a>
+
+                    <button id="navbarLangToggleMobile" data-lang-toggle-btn
+                        class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+                        aria-label="Switch language" title="Switch language">
+                        <span class="material-symbols-outlined">translate</span>
+                        <span class="sr-only">Switch language</span>
+                    </button>
+
+                    <!-- Mobile Hamburger Menu Button -->
+                    <button id="mobileMenuBtn"
+                        class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-primary/10 transition-colors">
+                        <span class="material-symbols-outlined text-2xl text-[#0d1b14] dark:text-white">menu</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Mobile Navigation Menu -->
+            <nav id="mobileMenu"
+                class="hidden lg:hidden fixed left-0 right-0 bg-white dark:bg-background-dark border-b border-[#e7f3ed] dark:border-[#1a3b2a] shadow-lg z-40 overflow-y-auto">
+                <div class="flex flex-col p-4 gap-2">
+                    <a href="#main"
+                        class="mobile-nav-link px-4 py-3 rounded-lg hover:bg-primary/10 text-[#0d1b14] dark:text-white flex items-center gap-3 font-semibold transition-colors">
+                        <span class="material-symbols-outlined">home</span>
+                        <span data-i18n="nav.home">Beranda</span>
+                    </a>
+                    <a href="#flowregist"
+                        class="mobile-nav-link px-4 py-3 rounded-lg hover:bg-primary/10 text-[#0d1b14] dark:text-white flex items-center gap-3 font-semibold transition-colors">
+                        <span class="material-symbols-outlined">route</span>
+                        <span data-i18n="nav.flow">Alur Pendaftaran</span>
+                    </a>
+                    <a href="#faq"
+                        class="mobile-nav-link px-4 py-3 rounded-lg hover:bg-primary/10 text-[#0d1b14] dark:text-white flex items-center gap-3 font-semibold transition-colors">
+                        <span class="material-symbols-outlined">help_center</span>
+                        <span data-i18n="nav.faq">FAQ</span>
+                    </a>
+                    <a href="#contact"
+                        class="mobile-nav-link px-4 py-3 rounded-lg hover:bg-primary/10 text-[#0d1b14] dark:text-white flex items-center gap-3 font-semibold transition-colors">
+                        <span class="material-symbols-outlined">mail</span>
+                        <span data-i18n="nav.contact">Kontak</span>
+                    </a>
+                    <a href="https://umb.ac.id/"
+                        class="mobile-nav-link px-4 py-3 rounded-lg hover:bg-primary/10 text-[#0d1b14] dark:text-white flex items-center gap-3 font-semibold transition-colors">
+                        <span class="material-symbols-outlined">globe</span>
+                        <span data-i18n="nav.site">Situs UM Bengkulu</span>
+                    </a>
+
+                    <hr class="my-2 border-gray-300 dark:border-gray-700" />
+                    <a href="https://simaru.umb.ac.id/login"
+                        class="mobile-nav-link px-4 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white flex items-center gap-3 font-semibold transition-colors justify-center">
+                        <span class="material-symbols-outlined text-base">login</span>
+                        <span data-i18n="nav.login">Masuk</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Main -->
+            <main class="flex-1">
+                <section id="main" class="relative isolate overflow-hidden">
+                    <div class="absolute inset-0">
+                        <div class="h-full w-full bg-[url('images/bg.png')] bg-cover bg-center"></div>
+                        <div class="absolute inset-0 bg-[#03150d]/80"></div>
+                    </div>
+
+                    <div class="relative max-w-[1280px] mx-auto px-6 md:px-10 lg:px-20 py-16 lg:py-28">
+                        <div class="flex flex-col items-center gap-12 text-center text-white">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute h-full w-full rounded-full bg-white opacity-60"></span>
+                                    <span class="relative h-2 w-2 rounded-full bg-white"></span>
+                                </span>
+                                <span class="text-xs font-bold uppercase tracking-wider" data-i18n="hero.badge">
+                                    PMB 2026/2027 Telah Dibuka
+                                </span>
+                            </div>
+
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight" data-i18n-html="hero.title">
+                                Selamat Datang Di <span class="text-primary">SIMARU</span><br />
+                                Bersama UM Bengkulu
+                            </h1>
+
+                            <p class="text-white/80 max-w-xl" data-i18n="hero.desc">
+                                SIMARU UM Bengkulu, pintu gerbang menuju perjalanan pendidikan tinggi di Bumi Rafflesia!
+                                Simaru tidak hanya memudahkan pendaftaran, tetapi juga membawa Anda ke dunia
+                                pembelajaran yang menarik dan relevan.
+                            </p>
+
+                            <div class="relative inline-flex">
+                                <!-- Tombol Utama -->
+                                <button id="registerButton"
+                                    class="flex items-center gap-2 h-14 px-8 rounded-l-xl bg-primary hover:bg-primary-dark text-white font-bold shadow-lg transition-all">
+                                    <span data-i18n="cta.primary">Daftar Sekarang</span>
+                                </button>
+
+                                <!-- Tombol Dropdown -->
+                                <button id="langToggle"
+                                    class="flex items-center justify-center h-14 px-4 rounded-r-xl bg-primary hover:bg-primary-dark text-white shadow-lg border-l border-white/20">
+                                    <span id="langLabel" class="text-sm font-bold">ID</span>
+                                    <span class="material-symbols-outlined text-base">expand_more</span>
+                                </button>
+
+                                <!-- Dropdown -->
+                                <div id="langMenu"
+                                    class="absolute right-0 top-full mt-2 w-40 rounded-xl bg-white shadow-xl border border-gray-100 hidden z-50 overflow-hidden">
+                                    <a href="https://simaru.umb.ac.id/register"
+                                        class="w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#0d1b14] hover:bg-primary/10 transition block">
+                                        Indonesia
+                                    </a>
+                                    <a href="https://simaru.umb.ac.id/register_eng"
+                                        class="w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#0d1b14] hover:bg-primary/10 transition block">
+                                        English
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Alur Pendaftaran -->
+                <section id="flowregist"
+                    class="section-animate py-16 lg:py-24 bg-background-light dark:bg-background-dark">
+                    <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-20">
+                        <!-- Header -->
+                        <div class="text-center mb-16 section-animate-scale">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 mb-4">
+                                <span class="material-symbols-outlined text-primary text-sm">timeline</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-primary" data-i18n="flow.badge">Alur</span>
+                            </div>
+                            <h2 class="text-4xl md:text-5xl font-black mb-4" data-i18n="flow.heading">Alur Pendaftaran</h2>
+                            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto" data-i18n="flow.subheading">
+                                Pelajari Alur Pendaftaran Mahasiswa Baru di Universitas Muhammadiyah Bengkulu.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
+                            <!-- Gambar Ilustrasi -->
+                            <div
+                                class="flex justify-center lg:justify-start section-animate-left lg:sticky lg:top-24 w-full">
+                                <img src="images/ilustrasi.png" alt="Ilustrasi Alur Pendaftaran"
+                                    class="w-full max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl drop-shadow-2xl" />
+                            </div>
+
+                            <!-- Alur Pendaftaran Timeline -->
+                            <div class="relative">
+                                <!-- Vertical Line -->
+                                <div class="absolute left-4 md:left-7 top-8 h-[460px] w-0.5 md:w-1 bg-primary"></div>
+
+                                <!-- Timeline Container -->
+                                <div class="space-y-12 md:space-y-20 relative z-10">
+                                    <!-- Tahap 1 -->
+                                    <div class="relative">
+                                        <div class="flex gap-3 md:gap-6">
+                                            <div class="flex-shrink-0">
+                                                <div
+                                                    class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16 rounded-full bg-primary text-white font-bold text-sm md:text-lg shadow-lg border-4 border-white dark:border-[#0d1b14]">
+                                                    <span
+                                                        class="material-symbols-outlined text-xl md:text-2xl">create</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 pt-2">
+                                                <h3
+                                                    class="text-base md:text-lg font-bold text-[#0d1b14] dark:text-white mb-2" data-i18n="flow.step1.title">
+                                                    PENDAFTARAN ONLINE</h3>
+                                                <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 mb-3" data-i18n="flow.step1.desc">
+                                                    Lakukan pendaftaran secara online atau datang langsung ke kantor PMB
+                                                    untuk mengisi formulir</p>
+                                                <div
+                                                    class="space-y-1 md:space-y-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 ml-2 md:ml-4">
+                                                    <p data-i18n="flow.step1.point1">• Isi formulir pendaftaran</p>
+                                                    <p data-i18n="flow.step1.point2">• Lengkapi data diri Anda</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tahap 2 -->
+                                    <div class="relative">
+                                        <div class="flex gap-3 md:gap-6">
+                                            <div class="flex-shrink-0">
+                                                <div
+                                                    class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16 rounded-full bg-primary text-white font-bold text-sm md:text-lg shadow-lg border-4 border-white dark:border-[#0d1b14]">
+                                                    <span
+                                                        class="material-symbols-outlined text-xl md:text-2xl">payment</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 pt-2">
+                                                <h3
+                                                    class="text-base md:text-lg font-bold text-[#0d1b14] dark:text-white mb-2" data-i18n="flow.step2.title">
+                                                    PEMBAYARAN KEUANGAN</h3>
+                                                <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 mb-3" data-i18n="flow.step2.desc">
+                                                    Lakukan pembayaran biaya pendaftaran melalui transfer bank ke
+                                                    rekening resmi UM Bengkulu</p>
+                                                <div
+                                                    class="space-y-1 md:space-y-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 ml-2 md:ml-4">
+                                                    <p data-i18n="flow.step2.point1">• Transfer ke rekening bank</p>
+                                                    <p data-i18n="flow.step2.point2">• Konfirmasi pembayaran</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tahap 3 -->
+                                    <div class="relative">
+                                        <div class="flex gap-3 md:gap-6">
+                                            <div class="flex-shrink-0">
+                                                <div
+                                                    class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16 rounded-full bg-primary text-white font-bold text-sm md:text-lg shadow-lg border-4 border-white dark:border-[#0d1b14]">
+                                                    <span
+                                                        class="material-symbols-outlined text-xl md:text-2xl">verified</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 pt-2">
+                                                <h3
+                                                    class="text-base md:text-lg font-bold text-[#0d1b14] dark:text-white mb-2" data-i18n="flow.step3.title">
+                                                    VERIFIKASI BERKAS</h3>
+                                                <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300 mb-3" data-i18n="flow.step3.desc">Tim
+                                                    kami akan memverifikasi dokumen dan berkas pendaftaran Anda</p>
+                                                <div
+                                                    class="space-y-1 md:space-y-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 ml-2 md:ml-4">
+                                                    <p data-i18n="flow.step3.point1">• Cek kelengkapan berkas</p>
+                                                    <p data-i18n="flow.step3.point2">• Verifikasi data diri</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Info Footer -->
+                                <div
+                                    class="mt-12 p-4 bg-primary/10 dark:bg-primary/20 rounded-lg border border-primary/20 relative z-10">
+                                    <p class="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                                        <span class="font-semibold text-primary" data-i18n="flow.info.title">ℹ️ Informasi:</span> <span data-i18n="flow.info.body">Semua proses
+                                        tahapan pendaftaran dilaksanakan dalam satu gedung PMB kampus UM Bengkulu</span>
+                                    </p>
+                                    <a href="https://drive.google.com/file/d/1gbLmHrQ-1b8SUn_YOnvey1MUxkG1Ypfn/view"
+                                        class="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-colors h-10">
+                                        <span
+                                            class="material-symbols-outlined text-base flex items-center justify-center">arrow_forward</span>
+                                        <span data-i18n="flow.info.cta">Selengkapnya </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+
+
+                <!-- Section FAQ -->
+                <section id="faq"
+                    class="w-full py-16 lg:py-24 px-6 bg-gradient-to-b from-background-light to-white dark:from-[#102219] dark:to-[#162c21]">
+                    <div class="max-w-[1280px] mx-auto">
+                        <!-- Header -->
+                        <div class="text-center mb-16">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 mb-4">
+                                <span class="material-symbols-outlined text-primary text-sm">help_center</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-primary" data-i18n="faq.badge">Pertanyaan &
+                                    Jawaban</span>
+                            </div>
+                            <h2 class="text-4xl md:text-5xl font-black mb-4" data-i18n="faq.heading">Pertanyaan yang Sering Diajukan
+                            </h2>
+                            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto" data-i18n="faq.subheading">
+                                Temukan jawaban atas pertanyaan umum seputar pendaftaran dan alur di SIMARU UM Bengkulu
+                            </p>
+                        </div>
+
+                        <!-- Content Grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                            <!-- Illustration -->
+                            <div class="flex justify-center">
+                                <img src="images/ilustrasi-2.png" alt="FAQ Illustration" class="w-full max-w-md" />
+                            </div>
+
+                            <!-- FAQ Items -->
+                            <div class="space-y-3">
+                                <!-- FAQ Item 1 -->
+                                <div
+                                    class="faq-item bg-white dark:bg-[#1a3b2a] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                                    <button
+                                        class="faq-toggle w-full px-6 py-5 flex justify-between items-center font-semibold text-left hover:text-primary dark:hover:text-primary transition-colors">
+                                        <span class="text-[#0d1b14] dark:text-white" data-i18n="faq.q1">Apa saja jalur pendaftaran yang
+                                            tersedia?</span>
+                                        <span
+                                            class="material-symbols-outlined accordion-icon text-primary">expand_more</span>
+                                    </button>
+                                    <div
+                                        class="faq-content hidden px-6 pb-5 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                                        <span data-i18n="faq.a1.intro">SIMARU UM Bengkulu menyediakan empat jalur pendaftaran:</span>
+                                        <ul class="list-disc ml-4 mt-2 space-y-1">
+                                            <li data-i18n="faq.a1.item1"><strong>Jalur Reguler:</strong> Melalui One Day Service (pengisian
+                                                formulir, seleksi, pengumuman, dan registrasi dalam satu hari) atau
+                                                Daftar Online melalui website</li>
+                                            <li data-i18n="faq.a1.item2"><strong>Jalur Undangan:</strong> Untuk calon mahasiswa yang mendapat
+                                                undangan khusus</li>
+                                            <li data-i18n="faq.a1.item3"><strong>Jalur Kelas Internasional:</strong> Untuk program kelas
+                                                internasional</li>
+                                            <li data-i18n="faq.a1.item4"><strong>Jalur RPL:</strong> Untuk calon mahasiswa dengan pengalaman
+                                                kerja/prestasi profesional</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ Item 2 -->
+                                <div
+                                    class="faq-item bg-white dark:bg-[#1a3b2a] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                                    <button
+                                        class="faq-toggle w-full px-6 py-5 flex justify-between items-center font-semibold text-left hover:text-primary dark:hover:text-primary transition-colors">
+                                        <span class="text-[#0d1b14] dark:text-white" data-i18n="faq.q2">Apa saja persyaratan
+                                            pendaftaran?</span>
+                                        <span
+                                            class="material-symbols-outlined accordion-icon text-primary">expand_more</span>
+                                    </button>
+                                    <div
+                                        class="faq-content hidden px-6 pb-5 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                                        <span data-i18n="faq.a2.intro">Persyaratan untuk mendaftar ulang:</span>
+                                        <ul class="list-disc ml-4 mt-2 space-y-1">
+                                            <li data-i18n="faq.a2.item1">Menyerahkan Kartu Pendaftaran</li>
+                                            <li data-i18n="faq.a2.item2">Fotocopy Ijazah SMA/SMK/MA dilegalisir (2 lembar)</li>
+                                            <li data-i18n="faq.a2.item3">Surat Keterangan Lulus SMA/SMK/MA (bagi yang belum mendapatkan ijazah)
+                                            </li>
+                                            <li data-i18n="faq.a2.item4">Fotocopy Kartu Keluarga (1 lembar)</li>
+                                            <li data-i18n="faq.a2.item5">Pas Foto Warna 3x4 (5 lembar)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ Item 3 -->
+                                <div
+                                    class="faq-item bg-white dark:bg-[#1a3b2a] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                                    <button
+                                        class="faq-toggle w-full px-6 py-5 flex justify-between items-center font-semibold text-left hover:text-primary dark:hover:text-primary transition-colors">
+                                        <span class="text-[#0d1b14] dark:text-white" data-i18n="faq.q3">Bagaimana dengan sistem
+                                            pembayaran?</span>
+                                        <span
+                                            class="material-symbols-outlined accordion-icon text-primary">expand_more</span>
+                                    </button>
+                                    <div
+                                        class="faq-content hidden px-6 pb-5 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                                        <span data-i18n="faq.a3.intro">Pembayaran dapat dilakukan melalui rekening bank berikut:</span>
+                                        <ul class="list-disc ml-4 mt-2 space-y-1">
+                                            <li data-i18n="faq.a3.item1"><strong>Bank MEGA Syariah:</strong> 10000 1000 170958</li>
+                                            <li data-i18n="faq.a3.item2"><strong>Bank Syari'ah Indonesia (BSI):</strong> 7014809931</li>
+                                            <li data-i18n="faq.a3.item3"><strong>Bank Negara Indonesia (BNI46):</strong> 0772001759</li>
+                                            <li data-i18n="faq.a3.item4"><strong>Bank Bengkulu:</strong> 00101106003694</li>
+                                            <li data-i18n="faq.a3.item5"><strong>Bank Mandiri:</strong> 1790002703093</li>
+                                            <li data-i18n="faq.a3.item6"><strong>Bank Muammalat:</strong> 4310049085</li>
+                                        </ul>
+                                        <p data-i18n="faq.a3.note">Pastikan mencantumkan nama dan nomor peserta saat melakukan transfer.</p>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ Item 4 -->
+                                <div
+                                    class="faq-item bg-white dark:bg-[#1a3b2a] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                                    <button
+                                        class="faq-toggle w-full px-6 py-5 flex justify-between items-center font-semibold text-left hover:text-primary dark:hover:text-primary transition-colors">
+                                        <span class="text-[#0d1b14] dark:text-white" data-i18n="faq.q4">Kapan jadwal pendaftaran?</span>
+                                        <span
+                                            class="material-symbols-outlined accordion-icon text-primary">expand_more</span>
+                                    </button>
+                                    <div
+                                        class="faq-content hidden px-6 pb-5 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                                        <span data-i18n="faq.a4.intro">Jadwal pendaftaran terbagi dalam 3 gelombang:</span>
+                                        <ul class="list-disc ml-4 mt-2 space-y-1">
+                                            <li data-i18n="faq.a4.item1"><strong>Gelombang 1:</strong> Januari - April 2025</li>
+                                            <li data-i18n="faq.a4.item2"><strong>Gelombang 2:</strong> Mei - Agustus 2025</li>
+                                            <li data-i18n="faq.a4.item3"><strong>Gelombang 3:</strong> September - Oktober 2025</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ Item 5 -->
+                                <div
+                                    class="faq-item bg-white dark:bg-[#1a3b2a] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                                    <button
+                                        class="faq-toggle w-full px-6 py-5 flex justify-between items-center font-semibold text-left hover:text-primary dark:hover:text-primary transition-colors">
+                                        <span class="text-[#0d1b14] dark:text-white" data-i18n="faq.q5">Di mana tempat pendaftaran?</span>
+                                        <span
+                                            class="material-symbols-outlined accordion-icon text-primary">expand_more</span>
+                                    </button>
+                                    <div
+                                        class="faq-content hidden px-6 pb-5 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                                        <span data-i18n="faq.a5.intro">Pendaftaran dapat dilakukan di:</span>
+                                        <ul class="list-disc ml-4 mt-2 space-y-1">
+                                            <li data-i18n="faq.a5.item1"><strong>Tempat:</strong> Gedung Penerimaan Mahasiswa Baru (PMB)</li>
+                                            <li data-i18n="faq.a5.item2"><strong>Alamat:</strong> Kampus I Jalan Bali Kota Bengkulu</li>
+                                            <li data-i18n="faq.a5.item3"><strong>Jam Kerja:</strong> Senin s/d Sabtu Jam 08.00-14.00 Wib</li>
+                                            <li data-i18n="faq.a5.item4"><strong>Online:</strong> Daftar Online melalui website resmi UM Bengkulu
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- FAQ Item 6 -->
+                                <div
+                                    class="faq-item bg-white dark:bg-[#1a3b2a] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                                    <button
+                                        class="faq-toggle w-full px-6 py-5 flex justify-between items-center font-semibold text-left hover:text-primary dark:hover:text-primary transition-colors">
+                                        <span class="text-[#0d1b14] dark:text-white" data-i18n="faq.q6">Apa itu One Day Service?</span>
+                                        <span
+                                            class="material-symbols-outlined accordion-icon text-primary">expand_more</span>
+                                    </button>
+                                    <div
+                                        class="faq-content hidden px-6 pb-5 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                                        <span data-i18n="faq.a6.intro">One Day Service adalah layanan lengkap dalam satu hari yang meliputi:</span>
+                                        <ul class="list-disc ml-4 mt-2 space-y-1">
+                                            <li data-i18n="faq.a6.item1">Pengisian Formulir Pendaftaran</li>
+                                            <li data-i18n="faq.a6.item2">Seleksi/Ujian</li>
+                                            <li data-i18n="faq.a6.item3">Pengumuman Hasil</li>
+                                            <li data-i18n="faq.a6.item4">Registrasi (bagi yang diterima)</li>
+                                        </ul>
+                                        <span data-i18n="faq.a6.note">Layanan ini dirancang untuk kemudahan calon mahasiswa yang ingin menyelesaikan
+                                        proses pendaftaran dengan cepat.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Footer -->
+            <footer id="contact"
+                class="bg-gradient-to-b from-[#0a1811] to-[#051108] dark:from-[#0a1811] dark:to-[#051108] border-t border-primary/20 text-white">
+                <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-20 py-20">
+
+
+                    <!-- Footer Content Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+                        <!-- Logo & Desc -->
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <img src="images/logo.png" alt="SIMARU Logo" class="h-12 w-auto" />
+                                <div>
+                                    <h3 class="text-xl font-bold" data-i18n="footer.title">SIMARU</h3>
+                                    <p class="text-xs text-white/60 uppercase tracking-wide" data-i18n="footer.brand">UM Bengkulu</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-white/70 leading-relaxed" data-i18n="footer.desc">
+                                Platform penerimaan mahasiswa baru terpadu untuk Universitas Muhammadiyah Bengkulu.
+                            </p>
+                            <div class="flex gap-3 pt-4">
+                                <a href="mailto:humas@umb.ac.id"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/30 hover:bg-primary text-white transition-colors">
+                                    <span class="material-symbols-outlined text-lg">mail</span>
+                                </a>
+                                <a href="https://www.facebook.com/umb.umbengkulu/" target="_blank"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/30 hover:bg-primary text-white transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/umbengkulu/" target="_blank"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/30 hover:bg-primary text-white transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://twitter.com/UMBengkulu" target="_blank"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/30 hover:bg-primary text-white transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Quick Links -->
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-lg" data-i18n="footer.menu.title">Menu Utama</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="#main"
+                                        class="text-white/70 hover:text-primary transition flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sm">navigate_next</span>
+                                        <span data-i18n="nav.home">Beranda</span>
+                                    </a></li>
+                                <li><a href="#flowregist"
+                                        class="text-white/70 hover:text-primary transition flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sm">navigate_next</span>
+                                        <span data-i18n="nav.flow">Alur Pendaftaran</span>
+                                    </a></li>
+                                <li><a href="#faq"
+                                        class="text-white/70 hover:text-primary transition flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sm">navigate_next</span>
+                                        <span data-i18n="nav.faq">FAQ</span>
+                                    </a></li>
+                                <li><a href="#contact"
+                                        class="text-white/70 hover:text-primary transition flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sm">navigate_next</span>
+                                        <span data-i18n="nav.contact">Kontak</span>
+                                    </a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Akademik -->
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-lg" data-i18n="footer.academic.title">Akademik</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="https://ft.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item1">• Fakultas Teknik</a></li>
+                                <li><a href="https://fkip.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item2">• Fakultas Keguruan dan Ilmu
+                                        Pendidikan</a></li>
+                                <li><a href="https://fikes.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item3">• Fakultas Ilmu
+                                        Kesehatan</a></li>
+                                <li><a href="https://fisip.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item4">• Fakultas Ilmu Sosial dan
+                                        Ilmu Politik</a></li>
+                                <li><a href="https://www.instagram.com/fpp.um_bengkulu/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item5">• Fakultas Pertanian dan
+                                        Peternakan</a></li>
+                                <li><a href="https://febi.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item6">• Fakultas Ekonomi
+                                        Bisnis</a></li>
+                                <li><a href="https://www.instagram.com/faiumbengkulu/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item7">• Fakultas Agama Islam</a>
+                                </li>
+                                <li><a href="https://hukum.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item8">• Fakultas Hukum</a></li>
+                                <li><a href="#" class="text-white/70 hover:text-primary transition" data-i18n="footer.academic.item9">• Program
+                                        Pascasarjana (S2)</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Kontak -->
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-lg" data-i18n="footer.contact.title">Hubungi Kami</h4>
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <p class="text-white/60 mb-1" data-i18n="footer.contact.addressLabel">📍 Alamat</p>
+                                    <p class="text-white/80" data-i18n="footer.contact.addressValue">Kampus I Jl. Bali, Kota Bengkulu</p>
+                                </div>
+                                <div>
+                                    <p class="text-white/60 mb-1" data-i18n="footer.contact.emailLabel">📧 Email</p>
+                                    <a href="mailto:humas@umb.ac.id" class="text-white/80">humas@umb.ac.id</a>
+                                </div>
+                                <div>
+                                    <p class="text-white/60 mb-1" data-i18n="footer.contact.hoursLabel">🕐 Jam Kerja</p>
+                                    <p class="text-white/80" data-i18n="footer.contact.hoursValue">Senin - Sabtu<br />08:00 - 14:00 WIB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Unit Universitas -->
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-lg" data-i18n="footer.units.title">Unit Universitas</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="https://kemahasiswaan.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.units.item1">• Kemahasiswaan</a></li>
+                                <li><a href="https://lppm.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.units.item2">• LPPM</a></li>
+                                <li><a href="https://lpmpp.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.units.item3">• LPMPP</a></li>
+                                <li><a href="https://perpustakaan.umb.ac.id/"
+                                        class="text-white/70 hover:text-primary transition" data-i18n="footer.units.item4">• Perpustakaan</a></li>
+                                <li><a href="https://umb.ac.id/" class="text-white/70 hover:text-primary transition" data-i18n="footer.units.item5">•
+                                        UM Bengkulu</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent mb-8"></div>
+
+                    <!-- Bottom Section -->
+                    <div class="flex flex-col items-center justify-center text-center text-sm">
+                        <!-- Copyright -->
+                        <p class="text-white/50" data-i18n="footer.copyright">
+                            2026 Universitas Muhammadiyah Bengkulu. Semua hak dilindungi.
+                        </p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="assets/script.js"></script>
+</body>
+
+</html>
